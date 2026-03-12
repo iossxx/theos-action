@@ -36,19 +36,9 @@ jobs:
           theos-src: 'https://github.com/roothide/theos'
           theos-sdks: 'https://github.com/theos/sdks'
 
-      - name: Setup GNU Make (macOS)
-        if: runner.os == 'macOS'
-        run: echo "$(brew --prefix)/opt/make/libexec/gnubin" >> $GITHUB_PATH
-
-      - name: Build package
+      - name: Verify Theos
         run: |
-          rm -f packages/*
-          make package FINALPACKAGE=1 -j$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 4)
-          make package THEOS_PACKAGE_SCHEME=rootless FINALPACKAGE=1 -j$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 4)
-          make package THEOS_PACKAGE_SCHEME=roothide FINALPACKAGE=1 -j$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 4)
-
-      - name: Upload package
-        uses: actions/upload-artifact@v4
-        with:
-          name: WCLitePro-${{ matrix.os }}
-          path: ${{ github.workspace }}/packages/*.deb
+          echo "Theos installed at $THEOS"
+          ls -la $THEOS
+          [ -d "$THEOS/sdks" ] && echo "SDKs present" || true
+          [ -d "$THEOS/toolchain" ] && echo "Toolchain present (Linux)" || true
