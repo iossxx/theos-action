@@ -14,33 +14,40 @@ Theos is a bit of a pain to set up. It requires a lot of dependencies, it takes 
 
 You must use a MacOS or Linux runner. Windows is not supported, and probably never will be.
 
-```bash
-- uses: iossxx/theos-action@v1
+```yaml
+- uses: 你的用户名/theos-action@v1
   with:
     # All of these are optional. Defaults are filled in below.
     
     # This is where Theos is downloaded to.
     theos-dir: 'theos'
     
-    # This is where Theos will be git cloned from.
-    theos-src: 'https://github.com/theos/theos'
+    # This is where Theos will be git cloned from. (Default: roothide)
+    theos-src: 'https://github.com/roothide/theos'
     
     # This is where the Theos SDKs will be downloaded from.
-    # Useful for using frameworks that aren't in the official repo.
     theos-sdks: 'https://github.com/theos/sdks'
 
     # Which branch to clone from theos-sdks repo.
     theos-sdks-branch: 'master'
 
-    # Whether to enable Orion, which adds support for tweaks coded in Swift
+    # Whether to enable Orion, which adds support for Swift tweaks
     orion: 'false'
 ```
 
 ## Example
 
-See [this workflow](https://github.com/Randomblock1/FleetsBGone/blob/master/.github/workflows/build.yml) as an example of how to use this. It configures a custom SDK repository, uses GitHub Actions cache to speed up downloads (Theos and the SDKs are rarely updated), builds a tweak, and packages it up using GitHub Artifacts.
+See [this workflow](https://github.com/Randomblock1/FleetsBGone/blob/master/.github/workflows/build.yml) as an example. It configures a custom SDK repository, uses GitHub Actions cache to speed up downloads (Theos and the SDKs are rarely updated), builds a tweak, and packages it up using GitHub Artifacts.
 
 That workflow should work out-of-the-box for most Theos projects. Some tweaking is required, but it's basically just copy-paste.
+
+## roothide / rootless
+
+Default `theos-src` is [roothide/theos](https://github.com/roothide/theos). For classic theos, use:
+
+```yaml
+theos-src: 'https://github.com/theos/theos'
+```
 
 ## Issues
 
