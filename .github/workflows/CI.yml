@@ -30,7 +30,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.upstream_heads }}
 
       - name: Prepare Theos
-        uses: Randomblock1/theos-action@main
+        uses: ./
         with:
           theos-dir: ${{ github.workspace }}/theos
           theos-src: 'https://github.com/roothide/theos'
