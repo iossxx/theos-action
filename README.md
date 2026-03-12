@@ -15,7 +15,7 @@ Theos is a bit of a pain to set up. It requires a lot of dependencies, it takes 
 You must use a MacOS or Linux runner. Windows is not supported, and probably never will be.
 
 ```yaml
-- uses: 你的用户名/theos-action@v1
+- uses: iossxx/theos-action@v1
   with:
     # All of these are optional. Defaults are filled in below.
     
